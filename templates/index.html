@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeMCU Data Receiver</title>
+    <style>
+        body {
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    margin: 20px auto;  /* Adjust margins for very small screens */
+  }
+}
+
+h1 {
+  color: black;
+}
+
+
+.data-box {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .data-box {
+    padding: 10px;
+  }
+}
+
+/* Form Group Styles */
+.form-group {
+  margin: 15px 0;
+}
+
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+
+input[type="text"], input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+
+button {
+  padding: 10px 20px;
+  background-color: #6a11cb;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+button:hover {
+  background-color: #2575fc;
+}
+
+
+span, h3, p {
+  color: black;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NodeMCU Data Receiver</h1>
+        <form method="post">
+            <div class="form-group">
+                <label for="server_ip"><span>Enter your NodeMcu IP Address</span></label>
+                <input type="text"   id="server_ip" name="server_ip" placeholder="Enter NodeMCU IP" required>
+            </div>
+            <div class="form-group">
+                <label for="port"><span>Enter your NodeMcu Port Address</span></label>
+                <input type="number" id="port" name="port" placeholder="Enter Port" required>
+            </div>
+            <button type="submit">Connect</button>
+        </form>
+        {% if data %}
+            <div class="data-box">
+                <h3>Time of Flight</h3>
+                <p>{{ data[0] + "s"}}</p>
+            </div>
+            <div class="data-box">
+                <h3>Angle Thrown</h3>
+                <p>{{ data[1]+"°"}}</p>
+            </div>
+            <div class="data-box">
+                <h3>Velocity Thrown</h3>
+                <p>{{ data[2]+"ms"}}</p>
+            </div>
+            <div class="data-box">
+                <h3>Distance Covered</h3>
+                <p>{{ data[3]+"m"}}</p>
+            </div>
+            <div class="data-box">
+                <h3>Pressure</h3>
+                <p>{{ data[4] +"pa"}}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
